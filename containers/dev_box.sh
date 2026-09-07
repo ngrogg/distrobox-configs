@@ -16,10 +16,10 @@ set -e
 distrobox create --image fedora:latest --name dev_box
 
 # Update container
-distrobox enter dev_environment -- sudo dnf update -y
+distrobox-upgrade dev_box
 
 # Install packages on container, change as needed
-distrobox enter dev_environment -- sudo dnf install -y \
+distrobox enter dev_box -- sudo dnf install -y \
     ansible \
     cmake \
     gcc-c++ \
