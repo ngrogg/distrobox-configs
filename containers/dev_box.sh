@@ -13,13 +13,13 @@ set -e
 # set -o pipefail
 
 # Create container
-distrobox create --image fedora:latest --name dev_box
+distrobox-create --image fedora:latest --name dev_box
 
 # Update container
 distrobox-upgrade dev_box
 
 # Install packages on container, change as needed
-distrobox enter dev_box -- sudo dnf install -y \
+distrobox-enter dev_box -- sudo dnf install -y \
     ansible \
     cmake \
     gcc-c++ \
@@ -37,12 +37,12 @@ distrobox enter dev_box -- sudo dnf install -y \
     zsh
 
 # Download/place zsh/vim rc files
-distrobox enter dev_box -- wget -O .zshrc https://raw.githubusercontent.com/ngrogg/dotfiles/refs/heads/main/.zshrc
-distrobox enter dev_box -- wget -O .vimrc https://raw.githubusercontent.com/ngrogg/dotfiles/refs/heads/main/.vimrc.simple
+distrobox-enter dev_box -- wget -O .zshrc https://raw.githubusercontent.com/ngrogg/dotfiles/refs/heads/main/.zshrc
+distrobox-enter dev_box -- wget -O .vimrc https://raw.githubusercontent.com/ngrogg/dotfiles/refs/heads/main/.vimrc.simple
 
 # Create related vim/zsh directories
-distrobox enter dev_box -- mkdir -p .zsh/cache
-distrobox enter dev_box -- mkdir -p .vim/backupdir
+distrobox-enter dev_box -- mkdir -p .zsh/cache
+distrobox-enter dev_box -- mkdir -p .vim/backupdir
 
 # Set container shell
-distrobox enter dev_box -- chsh -s $(which zsh)
+distrobox-enter dev_box -- chsh -s $(which zsh)

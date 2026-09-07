@@ -23,24 +23,24 @@ local defaultCluster="$2"
 local defaultClusterZone="$3"
 
 # Create container
-distrobox create --name google_cloud_sdk_container --image almalinux:10
+distrobox-create --name google_cloud_sdk_container --image almalinux:10
 
 # Update container
 distrobox-upgrade google_cloud_sdk_container
 
 # Download/place zsh/vim rc files
-distrobox enter google_cloud_sdk_container -- wget -O .zshrc https://raw.githubusercontent.com/ngrogg/dotfiles/refs/heads/main/.zshrc
-distrobox enter google_cloud_sdk_container -- wget -O .vimrc https://raw.githubusercontent.com/ngrogg/dotfiles/refs/heads/main/.vimrc.simple
+distrobox-enter google_cloud_sdk_container -- wget -O .zshrc https://raw.githubusercontent.com/ngrogg/dotfiles/refs/heads/main/.zshrc
+distrobox-enter google_cloud_sdk_container -- wget -O .vimrc https://raw.githubusercontent.com/ngrogg/dotfiles/refs/heads/main/.vimrc.simple
 
 # Create related vim/zsh directories
-distrobox enter google_cloud_sdk_container -- mkdir -p .zsh/cache
-distrobox enter google_cloud_sdk_container -- mkdir -p .vim/backupdir
+distrobox-enter google_cloud_sdk_container -- mkdir -p .zsh/cache
+distrobox-enter google_cloud_sdk_container -- mkdir -p .vim/backupdir
 
 # Set container shell
-distrobox enter google_cloud_sdk_container -- chsh -s $(which zsh)
+distrobox-enter google_cloud_sdk_container -- chsh -s $(which zsh)
 
 # Create Google Cloud SDK repo
-distrobox enter google_cloud_sdk_container -- sudo tee -a /etc/yum.repos.d/google-cloud-sdk.repo << EOM
+distrobox-enter google_cloud_sdk_container -- sudo tee -a /etc/yum.repos.d/google-cloud-sdk.repo << EOM
 [google-cloud-cli]
 name=Google Cloud CLI
 baseurl=https://packages.cloud.google.com/yum/repos/cloud-sdk-el10-x86_64
@@ -51,13 +51,13 @@ gpgkey=https://packages.cloud.google.com/yum/doc/rpm-package-key-v10.gpg
 EOM
 
 # Install Gcloud SDK dependencies
-distrobox enter google_cloud_sdk_container -- sudo dnf install -y libxcrypt-compat
+distrobox-enter google_cloud_sdk_container -- sudo dnf install -y libxcrypt-compat
 
 # Install Gcloud SDK
-distrobox enter google_cloud_sdk_container -- sudo dnf install -y google-cloud-cli
+distrobox-enter google_cloud_sdk_container -- sudo dnf install -y google-cloud-cli
 
 # Initialize Gcloud SDK
-distrobox enter google_cloud_sdk_container -- gcloud init
+distrobox-enter google_cloud_sdk_container -- gcloud init
 
 # If project was not passed, prompt user to enter default project
 if [[ -z "$defaultProject" ]]; then
@@ -65,13 +65,13 @@ if [[ -z "$defaultProject" ]]; then
 fi
 
 # Set default project
-distrobox enter google_cloud_sdk_container -- gcloud config set project "$defaultProject"
+distrobox-enter google_cloud_sdk_container -- gcloud config set project "$defaultProject"
 
 # Install Kubectl
-distrobox enter google_cloud_sdk_container -- sudo dnf install -y kubectl
+distrobox-enter google_cloud_sdk_container -- sudo dnf install -y kubectl
 
 # Install Kubectl auth plugin
-distrobox enter google_cloud_sdk_container -- sudo dnf install -y google-cloud-sdk-gke-gcloud-auth-plugin
+distrobox-enter google_cloud_sdk_container -- sudo dnf install -y google-cloud-sdk-gke-gcloud-auth-plugin
 
 # If default cluster was not passed
 if [[ -z "$defaultCluster" ]]; then
@@ -84,4 +84,4 @@ if [[ -z "$defaultClusterZone" ]]; then
 fi
 
 # Authorize default cluster
-distrobox enter google_cloud_sdk_container -- gcloud container clusters get-credentials "$defaultCluster" --zone="$defaultClusterZone"
+distrobox-enter google_cloud_sdk_container -- gcloud container clusters get-credentials "$defaultCluster" --zone="$defaultClusterZone"
