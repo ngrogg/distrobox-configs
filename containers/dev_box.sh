@@ -45,4 +45,4 @@ distrobox-enter dev_box -- mkdir -p .zsh/cache
 distrobox-enter dev_box -- mkdir -p .vim/backupdir
 
 # Set container shell
-distrobox-enter dev_box -- chsh -s $(which zsh)
+distrobox-enter dev_box -- chsh -s /usr/bin/zsh

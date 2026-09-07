@@ -37,7 +37,7 @@ distrobox-enter google_cloud_sdk_container -- mkdir -p .zsh/cache
 distrobox-enter google_cloud_sdk_container -- mkdir -p .vim/backupdir
 
 # Set container shell
-distrobox-enter google_cloud_sdk_container -- chsh -s $(which zsh)
+distrobox-enter google_cloud_sdk_container -- chsh -s /usr/bin/zsh
 
 # Create Google Cloud SDK repo
 distrobox-enter google_cloud_sdk_container -- sudo tee -a /etc/yum.repos.d/google-cloud-sdk.repo << EOM
