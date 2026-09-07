@@ -3,7 +3,7 @@
 # Dev Box
 # BASH script to configure distrobox container for development
 # By Nicholas Grogg
-# Revision: TODO
+# Revision: 20260907
 
 # Set exit on error
 set -e
