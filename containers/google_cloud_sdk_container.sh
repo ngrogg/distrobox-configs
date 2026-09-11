@@ -8,9 +8,7 @@
 # Set exit on error
 set -e
 # Uncomment for error on unset variables
-# set -u
-# Uncomment for exit on non-zero status from rightmost pipe command
-# set -o pipefail
+set -u
 
 # Variables
 ## Variable for default Google Cloud SDK project

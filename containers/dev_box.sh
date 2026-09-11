@@ -8,9 +8,7 @@
 # Set exit on error
 set -e
 # Uncomment for error on unset variables
-# set -u
-# Uncomment for exit on non-zero status from rightmost pipe command
-# set -o pipefail
+set -u
 
 # Variables
 ## Name for gitconfig
@@ -55,6 +53,7 @@ distrobox-enter dev_box -- mkdir -p .vim/backupdir
 if [[ -z "$gitUsername" ]]; then
     read -p "Enter a username for git commits" : gitUsername
 fi
+
 if [[ -z "$gitEmail" ]]; then
     read -p "Enter an email for git commits" : gitEmail
 fi
