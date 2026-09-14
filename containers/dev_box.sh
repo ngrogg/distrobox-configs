@@ -64,3 +64,6 @@ distrobox-enter dev_box -- git config --global user.email "$gitEmail"
 
 # Set container shell
 distrobox-enter dev_box -- chsh -s /usr/bin/zsh
+
+# Configure SSH key
+distrobox-enter dev_box -- ssh-keygen -t ed25519 -a 100 -C "$(whoami) dev_box key"
