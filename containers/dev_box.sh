@@ -37,12 +37,14 @@ distrobox-enter dev_box -- sudo dnf install -y \
     python3 \
     python3-devel \
     python3-pip \
+    tmux \
     vim-enhanced \
     zsh
 
-# Download/place zsh/vim rc files
-distrobox-enter dev_box -- wget -O .zshrc https://raw.githubusercontent.com/ngrogg/dotfiles/refs/heads/main/.zshrc
+# Download/place tmux/vim/zsh rc files
+distrobox-enter dev_box -- wget -O .vimrc https://raw.githubusercontent.com/ngrogg/dotfiles/refs/heads/main/.tmux.conf
 distrobox-enter dev_box -- wget -O .vimrc https://raw.githubusercontent.com/ngrogg/dotfiles/refs/heads/main/.vimrc.simple
+distrobox-enter dev_box -- wget -O .zshrc https://raw.githubusercontent.com/ngrogg/dotfiles/refs/heads/main/.zshrc
 
 # Create related vim/zsh directories
 distrobox-enter dev_box -- mkdir -p .zsh/cache
